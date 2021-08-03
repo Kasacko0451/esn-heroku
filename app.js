@@ -6,7 +6,6 @@ const session = require("express-session");
 const auth_routes = require("./routes/auth_routes.js");
 const all_routes = require("./routes/all_routes.js");
 const PORT = process.env.PORT || 8080;
-const pool = require("./db.js");
 
 app.use(express.static(path.join(__dirname, "build")));
 app.use(express.static("public"));
@@ -36,3 +35,5 @@ app.use("/", authCheck, all_routes);
 app.listen(PORT, () => console.log(`Server started on ${PORT}`));
 
 module.exports = app;
+
+// add loading screens

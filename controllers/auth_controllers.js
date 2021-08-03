@@ -34,5 +34,7 @@ exports.islog = function(req, res, next) {
         else { 
             return res.json(false) 
         }
+    } else {
+      return res.json(false)
     }
 }
