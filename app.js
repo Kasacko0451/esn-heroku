@@ -10,6 +10,7 @@ const PORT = process.env.PORT || 8080;
 app.use(express.static(path.join(__dirname, "build")));
 app.use(express.static("public"));
 
+app.use("/users", authCheck, all_routes);
 app.get( `/*`, (req, res, next) => {
   res.sendFile(path.join(__dirname, "build", "index.html"));
 });
@@ -32,7 +33,7 @@ app.use(passport.initialize());
 app.use(passport.session());
 
 app.use("/auth", auth_routes);
-app.use("/users", authCheck, all_routes);
+
 
 app.listen(PORT, () => console.log(`Server started on ${PORT}`));
 
