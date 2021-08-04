@@ -4,7 +4,7 @@ const user_controllers = require("../controllers/user_controllers");
 const event_controllers = require("../controllers/event_controllers");
 
 //USER ROUTES
-router.get("/get_users", user_controllers.get_users);
+router.post("/get_users", user_controllers.get_users);
 
 router.post("/get_userform", user_controllers.get_userform);
 
