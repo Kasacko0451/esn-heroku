@@ -15,6 +15,8 @@ app.get( `/*`, (req, res, next) => {
 });
 
 const authCheck = (req, res, next) => {
+    console.log("auth check")
+    console.log(req.user)
     if (req.user) next();
 };
 
