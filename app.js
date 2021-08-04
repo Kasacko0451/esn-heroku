@@ -15,6 +15,8 @@ app.get( `/*`, (req, res, next) => {
 });
 
 const authCheck = (req, res, next) => {
+    console.log("authcheck")
+    console.log(req.user)
     if (req.user) next();
 };
 
@@ -29,7 +31,7 @@ app.use(cookieSession({
 app.use(passport.initialize());
 app.use(passport.session());
 
-app.use("/auth",() => {console.log(1); console.log(process.env)}, auth_routes);
+app.use("/auth", auth_routes);
 app.use("/", authCheck, all_routes);
 
 app.listen(PORT, () => console.log(`Server started on ${PORT}`));
