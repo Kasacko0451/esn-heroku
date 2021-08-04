@@ -1,8 +1,8 @@
+const cookieSession = require('cookie-session')
 const path = require("path");
 const express = require("express");
 const app = express();
 const passport = require("./passport/index.js");
-const session = require("express-session");
 const auth_routes = require("./routes/auth_routes.js");
 const all_routes = require("./routes/all_routes.js");
 const PORT = process.env.PORT || 8080;
@@ -15,23 +15,21 @@ app.get( `/*`, (req, res, next) => {
 });
 
 const authCheck = (req, res, next) => {
-    console.log("auth check")
-    console.log(req.user)
     if (req.user) next();
 };
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
-app.use(session({
-    secret: "secret",
-    resave: false,
-    saveUninitialized: false,
-}));
+
+app.use(cookieSession({
+  name: 'session',
+  keys: ['key1', 'key2']
+}))
 
 app.use(passport.initialize());
 app.use(passport.session());
 
-app.use("/auth", auth_routes);
+app.use("/auth",() => {console.log(1); console.log(process.env)}, auth_routes);
 app.use("/", authCheck, all_routes);
 
 app.listen(PORT, () => console.log(`Server started on ${PORT}`));
