@@ -29,7 +29,7 @@ app.use(session({
 app.use(passport.initialize());
 app.use(passport.session());
 
-app.use("/auth",() => {console.log(1); console.log(process.env)}, auth_routes);
+app.use("/auth", auth_routes);
 app.use("/", authCheck, all_routes);
 
 app.listen(PORT, () => console.log(`Server started on ${PORT}`));
