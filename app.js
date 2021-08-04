@@ -29,7 +29,7 @@ app.use(cookieSession({
 }))
 
 app.use(passport.initialize());
-app.use(passport.cookieSession());
+app.use(passport.session());
 
 app.use("/auth", auth_routes);
 app.use("/", authCheck, all_routes);
