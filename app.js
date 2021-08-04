@@ -16,7 +16,7 @@ const authCheck = (req, res, next) => {
 app.use(express.static(path.join(__dirname, "build")));
 app.use(express.static("public"));
 
-app.use("/users", authCheck, all_routes);
+app.get("/users", authCheck, all_routes);
 app.get( `/*`, (req, res, next) => {
   res.sendFile(path.join(__dirname, "build", "index.html"));
 });
