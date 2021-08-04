@@ -31,7 +31,7 @@ app.use(cookieSession({
 app.use(passport.initialize());
 app.use(passport.session());
 
-app.use("/auth", () => console.log("trying to log in"), auth_routes);
+app.use("/auth", auth_routes);
 app.use("/", authCheck, all_routes);
 
 app.listen(PORT, () => console.log(`Server started on ${PORT}`));
