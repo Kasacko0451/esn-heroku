@@ -1,8 +1,15 @@
 const pool = require("../db.js");
 
 exports.get_users = async function(req, res, next) {
+    pool.connect()
     const result = await pool.query("SELECT * FROM clanovi")
+    console.log(result.rows)
+     pool.end()
+    console.log(result.rows)
     return res.status(200).json(result.rows)
+    console.log(result.rows)
+    pool.end()
+    console.log(result.rows)
 }
 
 exports.get_userform = async function(req, res, next) {
