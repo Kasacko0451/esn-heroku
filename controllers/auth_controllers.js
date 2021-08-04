@@ -27,6 +27,8 @@ exports.logout = function(req, res, next) {
 }
 
 exports.islog = function(req, res, next) {
+    console.log("islog")
+    console.log(req.user)
     if (req.user) {
         if (req.user.username === req.body.loggedInUser) { 
             return res.json(req.user.username) 
