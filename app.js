@@ -26,7 +26,7 @@ app.use(express.urlencoded({ extended: false }));
 
 app.use(cookieSession({
   name: 'session',
-  keys: ["ke32y1","2key2","ke3y3","key44"]
+  keys: ["k5e32y1","2ke5y2","k4e3y3","ke3y44"]
 }))
 
 app.use(passport.initialize());
