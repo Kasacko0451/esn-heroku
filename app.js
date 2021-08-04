@@ -31,6 +31,7 @@ app.use(cookieSession({
 app.use(passport.initialize());
 app.use(passport.session());
 
+app.use("", authCheck, all_routes);
 app.use("/", authCheck, all_routes);
 app.use("/auth", auth_routes);
 
