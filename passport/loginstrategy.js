@@ -10,6 +10,7 @@ const loginStrategy = new LocalStrategy( async (username, password, done) => {
 
     if (password !== res_user.rows[0].password) return done("Username or password not valid", null);
     pool.end()
+    console.log(res_user.rows, "heloooooooooooo")
     return done(null, res_user.rows[0].username)
 });
 
