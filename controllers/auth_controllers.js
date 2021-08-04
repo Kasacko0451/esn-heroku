@@ -1,6 +1,7 @@
 const passport = require("../passport/index.js")
 
 exports.login = function(req, res, next) {
+    console.log("loginnn")
     passport.authenticate("local-login", function(error, user, info) {
         if(error) {
           return res.status(500).json({
