@@ -7,6 +7,12 @@ const auth_routes = require("./routes/auth_routes.js");
 const all_routes = require("./routes/all_routes.js");
 const PORT = process.env.PORT || 8080;
 
+const authCheck = (req, res, next) => {
+    console.log("authcheck")
+    console.log(req.user)
+    if (req.user) next();
+};
+
 app.use(express.static(path.join(__dirname, "build")));
 app.use(express.static("public"));
 
@@ -14,12 +20,6 @@ app.use("/users", authCheck, all_routes);
 app.get( `/*`, (req, res, next) => {
   res.sendFile(path.join(__dirname, "build", "index.html"));
 });
-
-const authCheck = (req, res, next) => {
-    console.log("authcheck")
-    console.log(req.user)
-    if (req.user) next();
-};
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
