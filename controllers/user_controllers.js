@@ -1,7 +1,7 @@
 const pool = require("../db.js");
 
 exports.get_users = async function(req, res, next) {
-    
+    console.log("get USERS")
     pool.connect()
 
     const result = await pool.query("SELECT * FROM clanovi")
