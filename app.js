@@ -17,6 +17,7 @@ app.use(express.static(path.join(__dirname, "build")));
 app.use(express.static("public"));
 
 app.get( `/*`, (req, res, next) => {
+    console.log("getttttt")
   res.sendFile(path.join(__dirname, "build", "index.html"));
 });
 
@@ -25,7 +26,7 @@ app.use(express.urlencoded({ extended: false }));
 
 app.use(cookieSession({
   name: 'session',
-  keys: ["key1","key2","key3","key4"]
+  keys: ["ke32y1","2key2","ke3y3","key44"]
 }))
 
 app.use(passport.initialize());
