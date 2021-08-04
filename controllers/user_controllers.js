@@ -1,15 +1,14 @@
 const pool = require("../db.js");
 
 exports.get_users = async function(req, res, next) {
-    pool.connect()
-    const result = await pool.query("SELECT * FROM clanovi")
-    console.log(1,result.rows)
-     pool.end()
-    console.log(2,result.rows)
+    const client = await pool.connect()
+    const result = await client.query("SELECT * FROM clanovi")
+    console.log(result.rows)
+    .then(() => {
+        console.log("users closed")
+        pool.end()
+    })
     return res.status(200).json(result.rows)
-    console.log(3,result.rows)
-    pool.end()
-    console.log(4,result.rows)
 }
 
 exports.get_userform = async function(req, res, next) {

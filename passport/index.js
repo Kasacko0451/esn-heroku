@@ -6,14 +6,12 @@ passport.serializeUser(function(user, done) {
     done(null, user);
   });
   
-passport.deserializeUser(function(username, done) {
-    
-    pool.query("SELECT * FROM users WHERE username=$1", [username], function(err, result) {
+passport.deserializeUser(async function(username, done) {
 
-        done(err, result.rows[0]) 
-        
+    const client = await pool.connect()
+    client.query("SELECT * FROM users WHERE username=$1", [username], function(err, result) {
         pool.end()
-
+        done(err, result.rows[0]) 
     })
 });
 
