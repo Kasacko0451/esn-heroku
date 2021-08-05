@@ -1,7 +1,6 @@
 const passport = require("../passport/index.js")
 
 exports.login = function(req, res, next) {
-    console.log("loginnn")
     passport.authenticate("local-login", function(error, user, info) {
         if(error) {
           return res.status(500).json({
@@ -29,8 +28,6 @@ exports.logout = function(req, res, next) {
 }
 
 exports.islog = function(req, res, next) {
-    console.log("islog")
-    console.log(req.user)
     if (req.user) {
         if (req.user.username === req.body.loggedInUser) { 
             return res.json(req.user.username) 
