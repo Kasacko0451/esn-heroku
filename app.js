@@ -5,16 +5,13 @@ const app = express();
 const passport = require("./passport/index.js");
 const auth_routes = require("./routes/auth_routes.js");
 const all_routes = require("./routes/all_routes.js");
-const pool = require("./db.js");
 const PORT = process.env.PORT || 8080;
-
-pool.connect()
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieSession({
     name: 'session',
-    keys: ['ke45y1', 'key342'],
+    keys: ['ke245y1', 'key3342'],
     secret: "secrfdsfs"
 }))
 
