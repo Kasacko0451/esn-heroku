@@ -5,7 +5,7 @@ exports.get_users = async function(req, res, next) {
     
     const result = await pool.query("SELECT * FROM clanovi")
     
-    console.log("dfsdfdsfs", result, result.rows)
+    console.log("dfsdfdsfs", result.rows)
 
     return res.status(200).json(result.rows)
 }
