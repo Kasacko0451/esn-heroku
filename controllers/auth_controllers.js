@@ -20,9 +20,7 @@ exports.login = function(req, res, next) {
 }
 
 exports.logout = function(req, res, next) {
-    req.session.destroy()
-    req.session = null;
-    pool.end()
+    req.logout()
 }
 
 exports.islog = function(req, res, next) {
