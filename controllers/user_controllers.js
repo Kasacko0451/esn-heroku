@@ -1,12 +1,7 @@
 const pool = require("../db.js");
 
 exports.get_users = async function(req, res, next) {
-    console.log("get USERS")
-    
     const result = await pool.query("SELECT * FROM clanovi")
-    
-    console.log("dfsdfdsfs", result.rows)
-
     return res.status(200).json(result.rows)
 }
 
@@ -48,6 +43,8 @@ exports.update_user = function(req, res, next) {
 }
 
 exports.delete_user = function(req, res, next) {
-    pool.query("DELETE FROM clanovi WHERE id=$1", [req.body.id])
+    pool.query("DELETE FROM dolasci WHERE clan_id=$1", [req.body.id], function (err, result) {
+        pool.query("DELETE FROM clanovi WHERE id=$1", [req.body.id])
+    })
     return res.status(200).json()
 }

@@ -1,3 +1,4 @@
+const pool = require("../db.js");
 const passport = require("../passport/index.js")
 
 exports.login = function(req, res, next) {
@@ -19,13 +20,10 @@ exports.login = function(req, res, next) {
 }
 
 exports.logout = function(req, res, next) {
-    console.log("LOOOOOOOOGOUT")
     pool.end()
     req.logout();
-    req.session.destroy(function (err) {
-        if (err) return next(err); 
-        req.session = null;
-  });
+    req.session.destroy()
+    req.session = null;
 }
 
 exports.islog = function(req, res, next) {
