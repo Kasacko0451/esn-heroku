@@ -9,7 +9,7 @@ passport.serializeUser(function(user, done) {
 passport.deserializeUser(async function(username, done) {
 
     pool.query("SELECT * FROM users WHERE username=$1", [username], function(err, result) {
-        console.log(username, result)
+
         done(err, result.rows[0]) 
     })
 });
