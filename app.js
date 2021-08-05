@@ -13,14 +13,6 @@ const authCheck = (req, res, next) => {
     if (req.user) next();
 };
 
-app.use(express.static(path.join(__dirname, "build")));
-app.use(express.static("public"));
-
-app.get( `/*`, (req, res, next) => {
-    console.log("getttttt")
-  res.sendFile(path.join(__dirname, "build", "index.html"));
-});
-
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 
@@ -34,6 +26,14 @@ app.use(passport.session());
 
 app.use("/auth", auth_routes);
 app.use("/users", authCheck, all_routes);
+
+app.use(express.static(path.join(__dirname, "build")));
+app.use(express.static("public"));
+
+app.get( `/*`, (req, res, next) => {
+    console.log("getttttt")
+  res.sendFile(path.join(__dirname, "build", "index.html"));
+});
 
 app.listen(PORT, () => console.log(`Server started on ${PORT}`));
 
