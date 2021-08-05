@@ -8,7 +8,6 @@ const all_routes = require("./routes/all_routes.js");
 const PORT = process.env.PORT || 8080;
 
 app.use(express.static(path.join(__dirname, "build")));
-app.use(express.static("public"));
 
 app.get( `*`, (req, res, next) => {
     console.log("getttttt")
