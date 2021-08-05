@@ -11,8 +11,8 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieSession({
     name: 'session',
-    keys: ['ke45y1', 'key342'],
-    secret: "secrfdsfs"
+    keys: ['ke45y162', 'key3342'],
+    secret: "secrf3dsfs"
 }))
 
 app.use(passport.initialize());
