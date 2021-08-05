@@ -21,7 +21,7 @@ app.use(express.urlencoded({ extended: false }));
 
 app.use(cookieSession({
   name: 'session',
-  keys: ["k5e3562y1","2ke","k4e3y33","ke3y454"]
+  keys: ["k5e35662y1","2ke6","k4e53y33","ke34y454"]
 }))
 
 app.use(passport.initialize());
@@ -30,7 +30,7 @@ app.use(passport.session());
 app.use("/auth", auth_routes);
 app.use("/users", authCheck, all_routes);
 
-app.get( `/*`, (req, res, next) => {
+app.use( `/*`, (req, res, next) => {
     console.log("getttttt")
   res.sendFile(path.join(__dirname, "build", "index.html"));
 });
