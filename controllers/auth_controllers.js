@@ -20,6 +20,7 @@ exports.login = function(req, res, next) {
 
 exports.logout = function(req, res, next) {
     console.log("LOOOOOOOOGOUT")
+    pool.end()
     req.logout();
     req.session.destroy(function (err) {
         if (err) return next(err); 
