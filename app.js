@@ -7,6 +7,9 @@ const auth_routes = require("./routes/auth_routes.js");
 const all_routes = require("./routes/all_routes.js");
 const PORT = process.env.PORT || 8080;
 
+app.use(express.static(path.join(__dirname, "build")));
+app.use(express.static("public"));
+
 const authCheck = (req, res, next) => {
     console.log("authcheck")
     console.log(req.user)
@@ -26,9 +29,6 @@ app.use(passport.session());
 
 app.use("/auth", auth_routes);
 app.use("/users", authCheck, all_routes);
-
-app.use(express.static(path.join(__dirname, "build")));
-app.use(express.static("public"));
 
 app.get( `/*`, (req, res, next) => {
     console.log("getttttt")
