@@ -21,6 +21,8 @@ exports.login = function(req, res, next) {
 
 exports.logout = function(req, res, next) {
     req.logout()
+    req.session.destroy()
+    return res.json()
 }
 
 exports.islog = function(req, res, next) {
