@@ -1,26 +1,39 @@
-const cookieSession = require("cookie-session")
 const path = require("path");
 const express = require("express");
 const app = express();
+const session = require('express-session')
 const passport = require("./passport/index.js");
 const auth_routes = require("./routes/auth_routes.js");
 const all_routes = require("./routes/all_routes.js");
+const pool = require("./db.js");
 const PORT = process.env.PORT || 8080;
 
-app.use(express.json());
-app.use(express.urlencoded({ extended: false }));
-app.use(cookieSession({
-    name: 'session',
-    keys: ['ke45y162', 'key3342'],
-    secret: "secrf3dsfs"
-}))
-
-app.use(passport.initialize());
-app.use(passport.session());
+const pgSession = require('connect-pg-simple')(session)
 
 const authCheck = (req, res, next) => {
   if (req.user) next();
 };
+
+app.use(express.json());
+app.use(express.urlencoded({ extended: false }));
+
+const sessionMiddleware = session({
+    name: 'profiession',
+    secret: "245134234",
+    resave: true,
+    saveUninitialized: false,
+    store: new pgSession({
+        pool: pool,
+        tableName : 'session',
+        ttl: 60 * 60 * 24,  // 1 day
+        pruneSessionInterval: 60
+    })
+});
+
+app.use(sessionMiddleware);
+
+app.use(passport.initialize());
+app.use(passport.session());
 
 app.use("/auth", auth_routes);
 app.use("/api", authCheck, all_routes);

@@ -7,10 +7,9 @@
     "server": "nodemon app.js"
   },
   "dependencies": {
-    "bcryptjs": "^2.4.3",
+    "connect-pg-simple": "^6.2.1",
     "express": "~4.16.1",
-    "cookie-session": "^1.4.0",
-    "http": "0.0.1-security",
+    "express-session": "^1.17.2",
     "nodemon": "^2.0.7",
     "passport": "^0.4.1",
     "passport-local": "^1.0.0",

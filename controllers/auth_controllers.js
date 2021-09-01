@@ -1,5 +1,5 @@
-const pool = require("../db.js");
 const passport = require("../passport/index.js")
+const pool = require("../db.js");
 
 exports.login = function(req, res, next) {
     passport.authenticate("local-login", function(error, user, info) {
@@ -19,21 +19,14 @@ exports.login = function(req, res, next) {
     })(req, res, next);
 }
 
-exports.logout = function(req, res, next) {
-    req.logout()
-    req.session.destroy()
-    return res.json()
+exports.logout = async function(req, res, next) {
+  pool.query("DELETE FROM session WHERE sid=$1", [req.sessionID])
+  await req.logout();
+  req.session = null
+  return res.status(200).json()
 }
 
 exports.islog = function(req, res, next) {
-    if (req.user) {
-        if (req.user.username === req.body.loggedInUser) { 
-            return res.json(req.user.username) 
-        }
-        else { 
-            return res.json(false) 
-        }
-    } else {
-      return res.json(false)
-    }
+  if (req.user) return res.status(200).json(req.user.username) 
+  else return res.status(200).json(false) 
 }

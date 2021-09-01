@@ -10,11 +10,11 @@ exports.get_userform = async function(req, res, next) {
     return res.status(200).json(result.rows[0])
 }
 
-exports.get_userdetails = async function(req, res ,next) {
-    const result = await pool.query(`SELECT c.*, json_agg(e.*) FROM clanovi c 
-                                     LEFT JOIN dolasci d
+exports.get_userdetails = async function(req, res, next) {
+    const result = await pool.query(`SELECT c.*, json_agg(e.*) FROM clanovi AS c 
+                                     LEFT JOIN dolasci AS d
                                         ON d.clan_id = $1
-                                     LEFT JOIN eventi e
+                                     LEFT JOIN eventi AS e
                                         ON e.id = d.event_id
                                      WHERE c.id =$1
                                      GROUP BY c.id`, [req.body.id])

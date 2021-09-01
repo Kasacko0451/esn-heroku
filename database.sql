@@ -1,5 +1,16 @@
 CREATE DATABASE esnproto
 
+CREATE TABLE "session" (
+    "sid" varchar NOT NULL COLLATE "default",
+    "sess" json NOT NULL,
+    "expire" timestamp(6) NOT NULL
+)
+WITH (OIDS=FALSE);
+
+ALTER TABLE "session" ADD CONSTRAINT "session_pkey" PRIMARY KEY ("sid") NOT DEFERRABLE INITIALLY IMMEDIATE;
+
+CREATE INDEX "IDX_session_expire" ON "session" ("expire");
+
 CREATE TABLE users (
     id SERIAL PRIMARY KEY,
     username VARCHAR(20),
@@ -20,7 +31,9 @@ CREATE TABLE clanovi (
 
 CREATE TABLE eventi (
     id SERIAL PRIMARY KEY,
-    ime TEXT DEFAULT '',
+    ime_eventa TEXT DEFAULT '',
+    ime_organizatora TEXT DEFAULT '',
+    vrsta_eventa TEXT DEFAULT '',
     datum TEXT DEFAULT '',
     cijena TEXT DEFAULT '',
     tim TEXT DEFAULT ''
