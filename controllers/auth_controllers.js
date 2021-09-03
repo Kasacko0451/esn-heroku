@@ -21,10 +21,7 @@ exports.login = function(req, res, next) {
 
 exports.logout = async function(req, res, next) {
   await req.logout();
-  pool.query("DELETE FROM session WHERE sid=$1", [req.sessionID], async function() {
-      const result = await pool.query("SELECT * FROM session")
-      console.log(result)
-  })
+  pool.query("DELETE FROM session WHERE sid=$1", [req.sessionID])
   req.session = null
   return res.status(200).json()
 }
