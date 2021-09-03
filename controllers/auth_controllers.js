@@ -22,7 +22,7 @@ exports.login = function(req, res, next) {
 exports.logout = function(req, res, next) {
 
   req.logout()
-  pool.query("DELETE FROM session WHERE sid=$1", [req.sessionID])
+  pool.query("DELETE FROM session)
 
   return res.status(200).json()
 }
