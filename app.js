@@ -10,6 +10,8 @@ const PORT = process.env.PORT || 8080;
 
 const pgSession = require('connect-pg-simple')(session)
 
+pool.connect()
+
 const authCheck = (req, res, next) => {
   if (req.user) next();
 };
