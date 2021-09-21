@@ -8,6 +8,8 @@ const all_routes = require("./routes/all_routes.js");
 const pool = require("./db.js");
 const PORT = process.env.PORT || 8080;
 
+pool.connect()
+
 const pgSession = require('connect-pg-simple')(session)
 
 const authCheck = (req, res, next) => {
