@@ -19,7 +19,7 @@ app.use(express.urlencoded({ extended: false }));
 
 const sessionMiddleware = session({
     name: 'profiession',
-    secret: "245134234",
+    secret: "262615134234",
     resave: true,
     saveUninitialized: false,
     cookie: { maxAge: 60 * 60 * 24 * 1000 },
