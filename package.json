@@ -4,7 +4,8 @@
   "private": true,
   "scripts": {
     "start": "node app.js",
-    "server": "nodemon app.js"
+    "server": "nodemon app.js",
+    "test": "jest"
   },
   "dependencies": {
     "connect-pg-simple": "^6.2.1",
@@ -15,5 +16,8 @@
     "passport-local": "^1.0.0",
     "pg": "^8.6.0",
     "pg-format": "^1.0.4"
+  },
+  "devDependencies": {
+    "jest": "^27.1.0"
   }
 }

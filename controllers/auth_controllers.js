@@ -11,7 +11,7 @@ exports.login = function(req, res, next) {
         req.logIn(user, function(error){
           if(error) {
             return res.status(500).json({
-              message: "Fail"
+              message: "Greška"
             });
           }
           return res.json(user)
@@ -20,13 +20,8 @@ exports.login = function(req, res, next) {
 }
 
 exports.logout = function(req, res, next) {
-
-    req.logout()
-  pool.query("DELETE FROM session WHERE sid=$1", [req.sessionID], () => {
-    pool.query("DELETE FROM session WHERE sid=$1", [req.sessionID])
-  })
-
-  return res.status(200).json()
+  req.logout();
+  pool.query("DELETE FROM session WHERE sid=$1", [req.sessionID])
 }
 
 exports.islog = function(req, res, next) {

@@ -10,8 +10,6 @@ const PORT = process.env.PORT || 8080;
 
 const pgSession = require('connect-pg-simple')(session)
 
-pool.connect()
-
 const authCheck = (req, res, next) => {
   if (req.user) next();
 };
@@ -24,6 +22,7 @@ const sessionMiddleware = session({
     secret: "245134234",
     resave: true,
     saveUninitialized: false,
+    cookie: { maxAge: 60 * 60 * 24 * 1000 },
     store: new pgSession({
         pool: pool,
         tableName : 'session',
