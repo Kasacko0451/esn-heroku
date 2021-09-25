@@ -36,16 +36,10 @@ CREATE TABLE eventi (
     vrsta_eventa TEXT DEFAULT '',
     datum TEXT DEFAULT '',
     cijena TEXT DEFAULT '',
-    tim TEXT DEFAULT ''
+    tim TEXT DEFAULT '',
+    dolasci integer[]
 );
 
-CREATE TABLE dolasci (
-    id SERIAL PRIMARY KEY,
-    clan_id BIGINT NOT NULL REFERENCES clanovi(id),
-    event_id BIGINT NOT NULL REFERENCES eventi(id)
-);
-
-DROP TABLE dolasci;
 DROP TABLE eventi;
 DROP TABLE clanovi;
 DROP TABLE users;
