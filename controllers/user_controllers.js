@@ -24,16 +24,13 @@ exports.get_userdetails = async function(req, res, next) {
 
 exports.create_user = function(req, res, next) {
     const { ime, prezime, datum, spol, razina, email, tel, tim } = req.body
-    try {
+   
         pool.query(`INSERT INTO clanovi (ime, prezime, datum, spol, razina, email, tel, tim) 
                     VALUES ($1, $2, $3, $4, $5, $6, $7, $8)`, 
                     [ime, prezime, datum, spol, razina, email, tel, tim])
 
         return res.status(200).json()
-    } catch (err) {
-
-        return res.status(503).json()
-    }
+    
 }
 
 exports.update_user = function(req, res, next) {
