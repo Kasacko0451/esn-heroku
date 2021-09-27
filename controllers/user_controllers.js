@@ -24,13 +24,12 @@ exports.get_userdetails = async function(req, res, next) {
 
 exports.create_user = function(req, res, next) {
     const { ime, prezime, datum, spol, razina, email, tel, tim } = req.body
-   
-        pool.query(`INSERT INTO clanovi (ime, prezime, datum, spol, razina, email, tel, tim) 
-                    VALUES ($1, $2, $3, $4, $5, $6, $7, $8)`, 
-                    [ime, prezime, datum, spol, razina, email, tel, tim])
 
-        return res.status(200).json()
-    
+    pool.query(`INSERT INTO clanovi (ime, prezime, datum, spol, razina, email, tel, tim) 
+                VALUES ($1, $2, $3, $4, $5, $6, $7, $8)`, 
+                [ime, prezime, datum, spol, razina, email, tel, tim])
+                
+    return res.status(200).json()
 }
 
 exports.update_user = function(req, res, next) {
@@ -44,8 +43,8 @@ exports.update_user = function(req, res, next) {
 }
 
 exports.delete_user = function(req, res, next) {
-    pool.query("UPDATE eventi SET dolasci = array_remove(dolasci, $1)", [req.body.id])
-    pool.query("DELETE FROM clanovi WHERE id=$1", [req.body.id])
+    pool.query("UPDATE eventi SET dolasci = array_remove(dolasci, $1)", [req.body.user_id])
+    pool.query("DELETE FROM clanovi WHERE id=$1", [req.body.user_id])
    
     return res.status(200).json()
 }

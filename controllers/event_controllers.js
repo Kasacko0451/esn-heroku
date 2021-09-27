@@ -31,15 +31,11 @@ exports.create_event = async function(req, res, next) {
     const { ime_eventa, ime_organizatora, datum, cijena, tim } = req.body[0]
     const clanovi = req.body[1]
 
-   
+    pool.query(`INSERT INTO eventi (ime_eventa, ime_organizatora, datum, cijena, tim, dolasci) 
+                                     VALUES ($1, $2, $3, $4, $5, $6)`, 
+                                    [ime_eventa, ime_organizatora, datum, cijena, tim, clanovi])
 
-        pool.query(`INSERT INTO eventi (ime_eventa, ime_organizatora, datum, cijena, tim, dolasci) 
-                                         VALUES ($1, $2, $3, $4, $5, $6)`, 
-                                        [ime_eventa, ime_organizatora, datum, cijena, tim, clanovi])
-
-        return res.status(200).json()
-
-    
+    return res.status(200).json()
 }
 
 exports.update_event = function(req, res, next) {  
@@ -55,8 +51,8 @@ exports.update_event = function(req, res, next) {
 }
 
 exports.delete_event = function(req, res, next) {
-    pool.query("DELETE FROM dolasci WHERE event_id=$1", [req.body.id], function (err, result) {
-        pool.query("DELETE FROM eventi WHERE id=$1", [req.body.id])
+    pool.query("DELETE FROM dolasci WHERE event_id=$1", [req.body.event_id], function (err, result) {
+        pool.query("DELETE FROM eventi WHERE id=$1", [req.body.event_id])
     })
     return res.status(200).json()
 }
