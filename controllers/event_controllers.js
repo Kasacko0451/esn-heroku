@@ -31,7 +31,7 @@ exports.create_event = async function(req, res, next) {
     const { ime_eventa, ime_organizatora, datum, cijena, tim } = req.body[0]
     const clanovi = req.body[1]
 
-    try {
+   
 
         pool.query(`INSERT INTO eventi (ime_eventa, ime_organizatora, datum, cijena, tim, dolasci) 
                                          VALUES ($1, $2, $3, $4, $5, $6)`, 
@@ -39,9 +39,7 @@ exports.create_event = async function(req, res, next) {
 
         return res.status(200).json()
 
-    } catch (err) {
-        return res.status(503).json()
-    }
+    
 }
 
 exports.update_event = function(req, res, next) {  
