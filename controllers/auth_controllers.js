@@ -21,7 +21,10 @@ exports.login = function(req, res, next) {
 
 exports.logout = function(req, res, next) {
   req.logout();
-  pool.query("DELETE FROM session WHERE sid=$1", [req.sessionID])
+  pool.query("DELETE FROM session WHERE sid=$1", [req.sessionID], () => {
+      pool.query("DELETE FROM session WHERE sid=$1", [req.sessionID])
+  }) 
+  return res.status(200).json() 
 }
 
 exports.islog = function(req, res, next) {
