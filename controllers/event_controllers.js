@@ -1,10 +1,6 @@
 const pool = require("../db.js");
 
-exports.get_events = async function(req, res, next) {
-    const result = await pool.query("SELECT * FROM eventi")
-    
-    return res.status(200).json(result.rows)
-}
+exports.get_events = async function(req, res, next) {}
 
 exports.get_eventdetails = async function(req, res ,next) {
     const result = await pool.query(`SELECT e.*, json_agg(c.*) FROM eventi AS e

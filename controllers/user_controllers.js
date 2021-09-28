@@ -1,9 +1,10 @@
 const pool = require("../db.js");
 
 exports.get_users = async function(req, res, next) {
-    const result = await pool.query("SELECT * FROM clanovi")
+    const result_users = await pool.query("SELECT * FROM clanovi")
+    const result_events = await pool.query("SELECT * FROM eventi")
     
-    return res.status(200).json(result.rows)
+    return res.status(200).json([result_users.rows, result_events.rows])
 }
 
 exports.get_userform = async function(req, res, next) {
@@ -23,8 +24,7 @@ exports.get_userdetails = async function(req, res, next) {
 }
 
 exports.create_user = function(req, res, next) {
-    console.log("CREATE USER ROUTE")
-    console.log(req.body)
+
     const { ime, prezime, datum, spol, razina, email, tel, tim } = req.body
 
     pool.query(`INSERT INTO clanovi (ime, prezime, datum, spol, razina, email, tel, tim) 
