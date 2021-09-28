@@ -22,7 +22,7 @@ app.use(express.urlencoded({ extended: false }));
 const sessionMiddleware = session({
     name: 'profiession',
     secret: "262615134234",
-    resave: true,
+    resave: false,
     saveUninitialized: false,
     cookie: { maxAge: 60 * 60 * 24 * 1000 },
     store: new pgSession({
