@@ -23,6 +23,8 @@ exports.get_userdetails = async function(req, res, next) {
 }
 
 exports.create_user = function(req, res, next) {
+    console.log("CREATE USER ROUTE")
+    console.log(req.body)
     const { ime, prezime, datum, spol, razina, email, tel, tim } = req.body
 
     pool.query(`INSERT INTO clanovi (ime, prezime, datum, spol, razina, email, tel, tim) 
