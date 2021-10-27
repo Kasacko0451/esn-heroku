@@ -3,7 +3,9 @@ const pool = require("../db.js");
 exports.get_users = async function(req, res, next) {
     const result_users = await pool.query("SELECT * FROM clanovi")
     const result_events = await pool.query("SELECT * FROM eventi")
-    
+    result_events.rows.forEach(event => {
+        event.datum = event.datum.toISOString().substring(0,10)
+    })
     return res.status(200).json([result_users.rows, result_events.rows])
 }
 
@@ -11,6 +13,15 @@ exports.get_userform = async function(req, res, next) {
     const result = await pool.query("SELECT * FROM clanovi WHERE id=$1", [req.body.id])
 
     return res.status(200).json(result.rows[0])
+}
+
+exports.count_events = async function(req, res, next) {
+    const result = await pool.query(`SELECT c.*, COUNT(e.*) as now1, COUNT(CASE WHEN c.id = ANY(e.dolasci) AND e.datum > now() - interval '30' day THEN 1 END) as last2 FROM clanovi AS c
+                                    LEFT JOIN eventi AS e
+                                        ON c.id = ANY(e.dolasci) 
+                                    GROUP BY c.id
+                                    `)
+    return res.status(200).json(result.rows)
 }
 
 exports.get_userdetails = async function(req, res, next) {
@@ -24,8 +35,7 @@ exports.get_userdetails = async function(req, res, next) {
 }
 
 exports.create_user = function(req, res, next) {
-    console.log("CREATE USER")
-    console.log(req.body)
+
     const { ime, prezime, datum, spol, razina, email, tel, tim } = req.body
 
     pool.query(`INSERT INTO clanovi (ime, prezime, datum, spol, razina, email, tel, tim) 
