@@ -3,9 +3,11 @@ const pool = require("../db.js");
 exports.get_users = async function(req, res, next) {
     const result_users = await pool.query("SELECT * FROM clanovi")
     const result_events = await pool.query("SELECT * FROM eventi")
-    console.log(result_events.rows)
+    
     result_events.rows.forEach(event => {
-        event.datum = event.datum.toISOString().substring(0,10)
+        if (event.datum) {
+            event.datum = event.datum.toISOString().substring(0,10)
+        }
     })
     return res.status(200).json([result_users.rows, result_events.rows])
 }
