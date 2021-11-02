@@ -16,8 +16,6 @@ router.post("/update_user", user_controllers.update_user);
 
 router.delete("/delete_user", user_controllers.delete_user)
 
-router.get("/count_events", user_controllers.count_events)
-
 //EVENT ROUTES
 router.get("/get_events", event_controllers.get_events);
 
