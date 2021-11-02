@@ -9,10 +9,7 @@ exports.get_eventdetails = async function(req, res ,next) {
                                      WHERE e.id=$1
                                      GROUP BY e.id
                                      `, [req.body.id])
-    if (result.rows[0].datum) {
-        result.rows[0].datum = result.rows[0].datum.toISOString().substring(0,10)
-    }
-  
+    result.rows[0].datum = result.rows[0].datum.toISOString().substring(0,10)
     return res.status(200).json(result.rows[0])
 }
 
@@ -21,9 +18,7 @@ exports.get_eventform = async function(req, res ,next) {
                                      WHERE id=$1
                                      `, [req.body.id])
 
-    if (result.rows[0].datum) {
-        result.rows[0].datum = result.rows[0].datum.toISOString().substring(0,10)
-    }                                  
+    result.rows[0].datum = result.rows[0].datum.toISOString().substring(0,10)                                    
     return res.status(200).json(result.rows[0])
 }
 
